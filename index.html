@@ -4033,14 +4033,7 @@ async function sendToAninha() {
     aninahApiHistory.push({ role: 'user', content: text });
     if (aninahApiHistory.length > 10) aninahApiHistory.splice(0, 2);
 
-    const response = await fetch('/.netlify/functions/aninha', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system: ANINHA_SYSTEM,
-        messages: aninahApiHistory,
-      }),
-    });
+    const response = await fetch('/.netlify/functions/aninha', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: [ { role: 'user', content: 'Oi Aninha' } ] }) }) .then(r => r.json()) .then(console.log)
 
     typing.classList.remove('show');
 
